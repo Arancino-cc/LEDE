@@ -259,6 +259,8 @@ foreach my $mirror (@ARGV) {
 push @mirrors, 'http://sources.lede-project.org';
 push @mirrors, 'http://mirror2.openwrt.org/sources';
 push @mirrors, 'http://downloads.openwrt.org/sources';
+push @mirrors, 'http://ftp.icm.edu.pl/pub/unix/graphics/GraphicsMagick/1.3';
+push @mirrors, 'https://mirror.sobukus.de/files/src/imagemagick';
 
 while (!-f "$target/$filename") {
 	my $mirror = shift @mirrors;
