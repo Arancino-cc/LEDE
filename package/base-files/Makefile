@@ -11,7 +11,7 @@ include $(INCLUDE_DIR)/kernel.mk
 include $(INCLUDE_DIR)/version.mk
 
 PKG_NAME:=base-files
-PKG_RELEASE:=173.9
+PKG_RELEASE:=173.10
 PKG_FLAGS:=nonshared
 
 PKG_FILE_DEPENDS:=$(PLATFORM_DIR)/ $(GENERIC_PLATFORM_DIR)/base-files/
@@ -156,7 +156,7 @@ define Package/base-files/install
 	$(LN) /proc/mounts $(1)/etc/mtab
 	mkdir -p $(1)/var
 	mkdir -p $(1)/tmp/run
-	$(LN) /tmp/run $(1)/var/run
+	$(LN) -s /tmp/run $(1)/var/run
 	mkdir -p $(1)/etc
 	$(LN) /tmp/resolv.conf /tmp/TZ /tmp/localtime $(1)/etc/
 
