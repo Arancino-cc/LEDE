@@ -249,7 +249,6 @@ define Image/mkfs/ubifs
 endef
 
 E2SIZE=$(shell echo $$(($(CONFIG_TARGET_ROOTFS_PARTSIZE)*1024*1024)))
-EXTE2SIZE=$(shell echo $$(($(CONFIG_TARGET_ROOTFS_EXT_PARTSIZE)*1024*1024)))
 
 define Image/mkfs/ext4
 	$(STAGING_DIR_HOST)/bin/make_ext4fs \
@@ -259,17 +258,6 @@ define Image/mkfs/ext4
 		$(if $(SOURCE_DATE_EPOCH),-T $(SOURCE_DATE_EPOCH)) \
 		$@ $(call mkfs_target_dir,$(1))/
 endef
-
-ifdef CONFIG_TARGET_ROOTFS_EXT
-define Image/mkfs/ext4-extra
-        $(STAGING_DIR_HOST)/bin/make_ext4fs \
-                -l $(EXTE2SIZE) -b $(CONFIG_TARGET_EXT4_BLOCKSIZE) \
-                $(if $(CONFIG_TARGET_EXT4_RESERVED_PCT),-m $(CONFIG_TARGET_EXT4_RESERVED_PCT)) \
-                $(if $(CONFIG_TARGET_EXT4_JOURNAL),,-J) \
-                $(if $(SOURCE_DATE_EPOCH),-T $(SOURCE_DATE_EPOCH)) \
-                $@ $(call mkfs_target_dir,$(1))-extra/
-endef
-endif
 
 define Image/Manifest
 	$(STAGING_DIR_HOST)/bin/opkg \
